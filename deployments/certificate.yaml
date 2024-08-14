@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: florenceokoli-cert
+  namespace: sock-shop
+spec:
+  secretName: florenceokoli-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: florenceokoli.me
+  dnsNames:
+    - florenceokoli.me
+    - sock-shop.florenceokoli.me

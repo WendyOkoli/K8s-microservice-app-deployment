@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sock-shop-ingress
+  namespace: sock-shop
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx  
+  rules:
+  - host: sock-shop.florenceokoli.me  
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: front-end 
+            port:
+              number: 80
+  # - host: prometheus.florenceokoli.me
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: pro-kube-prometheus-stack-alertmanager
+  #           port:
+  #             number: 9093
+  # - host: grafana.florenceokoli.me 
+  #   http: 
+  #     paths:          
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: pro-grafana
+  #           port:
+  #             number: 80
+  tls:
+  - hosts:
+    - sock-shop.florenceokoli.me 
+    secretName: florenceokoli-tls
+ 
