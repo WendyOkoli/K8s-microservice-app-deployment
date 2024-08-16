@@ -1,0 +1,23 @@
+# Local .terraform directories
+**/.terraform/*
+*.terraform
+*.terraform.*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Ignore any .tfvars files 
+# *.tfvars
+
+#ignore kubeconfig file
+tmp
+kubeconfig
+
+
+debug.txt
+backend
+**/manifests/*
+*manifests
+*manifests*
+Footer
