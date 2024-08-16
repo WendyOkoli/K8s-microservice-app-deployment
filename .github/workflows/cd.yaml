@@ -1,0 +1,28 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Kubeconfig
+      uses: azure/setup-kubectl@v2
+      with:
+        kubectl-version: 'latest'
+        azure-credentials: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Kubernetes manifests
+      run: |
+        kubectl apply -f deployments/
+
+    - name: Check deployment status
+      run: |
+        kubectl rollout status deployment/myapp -n sock-shop

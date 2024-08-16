@@ -1,0 +1,6 @@
+alerting:
+  alertmanagers:
+    - namespace: sock-shop
+      name: alertmanager
+      port: 9093
+

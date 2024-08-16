@@ -1,0 +1,23 @@
+# Global configurations
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+# Define scrape jobs
+scrape_configs:
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  
+
+# Alerting configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - 'alertmanager.sock-shop.svc.cluster.local:9093'
+
+# Rules to generate alerts
+rule_files:
+  - 'alerting-rules.yml'

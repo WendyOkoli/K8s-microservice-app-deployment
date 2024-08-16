@@ -4,18 +4,18 @@ metadata:
   name: sock-shop-ingress
   namespace: sock-shop
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
-  ingressClassName: nginx  
+  ingressClassName: nginx
   rules:
-  - host: sock-shop.florenceokoli.me  
+  - host: sock-shop.florenceokoli.me
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: front-end 
+            name: front-end
             port:
               number: 80
   - host: prometheus.florenceokoli.me
@@ -25,20 +25,23 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: prometheus-kube-prometheus-prometheus 
+            name: prometheus-operated
             port:
-              number: 9093
-  - host: grafana.florenceokoli.me 
-    http: 
-      paths:          
+              number: 9090
+  - host: grafana.florenceokoli.me
+    http:
+      paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: pro-grafana
+            name: prometheus-grafana 
             port:
               number: 80
   tls:
   - hosts:
-    - sock-shop.florenceokoli.me 
+    - sock-shop.florenceokoli.me
+    - prometheus.florenceokoli.me
+    - grafana.florenceokoli.me
+    - alertmanager.florenceokoli.me
     secretName: florenceokoli-tls
