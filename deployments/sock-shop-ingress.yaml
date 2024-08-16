@@ -42,4 +42,3 @@ spec:
   - hosts:
     - sock-shop.florenceokoli.me 
     secretName: florenceokoli-tls
- 
